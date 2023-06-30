@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import './index.css'
 
-function App() {
+const images = [
+  'https://via.placeholder.com/150x150',
+  'https://via.placeholder.com/200x200',
+  'https://via.placeholder.com/250x250',
+];
+
+const Slider = () => {
+  const [Image, setImage] = useState(0);
+
+  const nextImage = () => {
+    if (Image === images.length - 1) {
+      setImage(0);
+    } else {
+      setImage(Image + 1);
+    }
+  };
+
+  const backImage = () => {
+    if (Image === 0) {
+      setImage(images.length - 1);
+    } else {
+      setImage(Image - 1);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="slider">
+      <img src={images[Image]} alt='Fotographiya' />
+      <div className="buttons">
+        <button onClick={backImage}> Назад </button>
+        <button onClick={nextImage}> Вперед </button>
+      </div>
     </div>
   );
-}
+};
 
-export default App;
+export default Slider;
